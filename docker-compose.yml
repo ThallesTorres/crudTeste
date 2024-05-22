@@ -2,15 +2,10 @@ services:
   servidor-mysql:
     hostname: servidor-mysql
     container_name: servidor-mysql
-    image: mysql:latest
-    volumes:
-      - ./bd/deploy/mysql/init:/docker-entrypoint-initdb.d
+    build: ./bd
     ports:
       - "3306:3306"
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - TZ=America/Sao_Paulo
 
   back-end:
     hostname: back-end
@@ -28,27 +23,28 @@ services:
       - DB_NAME=teste
       - DB_PORT=3306
 
-#   front-end:
-#     hostname: servidor-front-end
-#     container_name: servidor-front-end
-#     build: ./front-end
-#     volumes:
-#       - front-volume:/var/www/html
-#     restart: always
+  front-end:
+    hostname: servidor-front-end
+    container_name: servidor-front-end
+    build: ./front-end
+    volumes:
+      - front-volume:/var/www/html
+    restart: always
+    environment:
+      - REACT_APP_API_URL=http://localhost:5002
 
-#   nginx:
-#     hostname: servidor-nginx-end
-#     container_name: servidor-nginx-end
-#     build: ./nginx
-#     ports:
-#       - 8888:80
-#     volumes:
-#       - front-volume:/var/www/html
-#     depends_on:
-#       - servidor-mysql
-#       - back-end
-#       - front-end
-#     restart: always
+  nginx:
+    hostname: servidor-nginx
+    container_name: servidor-nginx
+    build: ./nginx
+    ports:
+      - 8888:80
+    volumes:
+      - front-volume:/var/www/html
+    depends_on:
+      - back-end
+      - front-end
+    restart: always
 
-# volumes:
-#   front-volume:
+volumes:
+  front-volume:

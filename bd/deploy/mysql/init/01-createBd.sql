@@ -14,5 +14,5 @@ INSERT INTO usuarios (nome, email, fone, data_nascimento) VALUES
 ('Carlos Souza', 'carlos.souza@example.com', 31987654321, '1978-07-10'),
 ('Ana Pereira', 'ana.pereira@example.com', 41987654321, '1995-11-30');
 
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '1234';
-FLUSH PRIVILEGES;
+-- ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '1234';
+-- FLUSH PRIVILEGES;

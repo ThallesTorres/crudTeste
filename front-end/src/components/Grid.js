@@ -48,7 +48,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
 
   const handleDelete = async (id) => {
     await axios
-      .delete("http://back-end:5002/" + id)
+      .delete(`${process.env.REACT_APP_API_URL}/${id}`)
       .then(({ data }) => {
         const newArray = users.filter((user) => user.id !== id);
 
@@ -66,7 +66,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
         <Tr>
           <Th>Nome</Th>
           <Th>Email</Th>
-          <Th onlyWeb>Fone</Th>
+          <Th>Fone</Th>
           <Th></Th>
           <Th></Th>
         </Tr>

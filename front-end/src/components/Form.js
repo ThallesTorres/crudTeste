@@ -69,7 +69,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
     if (onEdit) {
       await axios
-        .put("http://back-end:5002/" + onEdit.id, {
+        .put(`${process.env.REACT_APP_API_URL}/${onEdit.id}`, {
           nome: user.nome.value,
           email: user.email.value,
           fone: user.fone.value,
@@ -79,7 +79,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
-        .post("http://servidor-back-end:5002", {
+        .post(`${process.env.REACT_APP_API_URL}/`, {
           nome: user.nome.value,
           email: user.email.value,
           fone: user.fone.value,
